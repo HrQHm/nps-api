@@ -10,13 +10,14 @@ class SurveysRepository implements ISurveysRepository {
         this.repository = dataSource.getRepository(Survey);
     }
 
-    async create(title: string, description: string): Promise<void> {
+    async create(title: string, description: string): Promise<Survey> {
         const survey = await this.repository.create({
             title,
             description
         });
 
         await this.repository.save(survey);
+        return survey;
     };
 
     async list(): Promise<Survey[]> {

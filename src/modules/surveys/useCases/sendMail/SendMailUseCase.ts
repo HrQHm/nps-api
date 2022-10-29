@@ -6,6 +6,7 @@ import { IUsersRepository } from "../../../users/repositories/IUsersRepository";
 import { ISurveysRepository } from "../../repositories/ISurveysRepository";
 import { ISurveysUsersRepository } from "../../repositories/ISurveysUsersRepository";
 import { SurveyUser } from "../../infra/typeorm/entities/SurveyUser";
+import { IMailProvider } from "../../../../services/MailProvider/IMailProvider";
 
 @injectable()
 class SendMailUseCase {
@@ -15,7 +16,9 @@ class SendMailUseCase {
         @inject("SurveysRepository")
         private surveysRepository: ISurveysRepository,
         @inject("UsersRepository")
-        private usersRepository: IUsersRepository
+        private usersRepository: IUsersRepository,
+        @inject("SendMailProvider")
+        private sendMailProvider: IMailProvider
     ) { }
 
     async execute(email: string, survey_id: string): Promise<SurveyUser> {
@@ -45,7 +48,7 @@ class SendMailUseCase {
 
         if (surveyUserAlreadyExists) {
             variables.id = surveyUserAlreadyExists.id;
-            await SendMailService.execute(email, survey.title, variables, npsPath);
+            await this.sendMailProvider.sendMail(email, survey.title, variables, npsPath);
             return surveyUserAlreadyExists;
         };
 
@@ -55,7 +58,7 @@ class SendMailUseCase {
         );
 
         variables.id = surveyUser.id;
-        await SendMailService.execute(email, survey.title, variables, npsPath);
+        await this.sendMailProvider.sendMail(email, survey.title, variables, npsPath);
         return surveyUser;
     };
 };

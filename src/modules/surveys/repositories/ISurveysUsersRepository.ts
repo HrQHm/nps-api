@@ -5,7 +5,7 @@ interface ISurveysUsersRepository {
     findSurveyUserByUserId(user_id: string): Promise<SurveyUser>;
     findSurveyUserById(id: string): Promise<SurveyUser>;
     updateSurveyUserValue(value: number, id: string): Promise<void>;
-    list(id: string): Promise<SurveyUser[]>;
+    listByIdSurvey(id: string): Promise<SurveyUser[]>;
 };
 
 export { ISurveysUsersRepository };

@@ -5,6 +5,8 @@ import { ISurveysRepository } from '../modules/surveys/repositories/ISurveysRepo
 import { ISurveysUsersRepository } from '../modules/surveys/repositories/ISurveysUsersRepository';
 import { UsersRepository } from '../modules/users/infra/typeorm/repositories/UsersRepository';
 import { IUsersRepository } from '../modules/users/repositories/IUsersRepository';
+import { IMailProvider } from '../services/MailProvider/IMailProvider';
+import { SendMailProvider } from '../services/MailProvider/implementations/SendMailProvider';
 
 container.registerSingleton<IUsersRepository>(
     "UsersRepository",
@@ -19,4 +21,10 @@ container.registerSingleton<ISurveysRepository>(
 container.registerSingleton<ISurveysUsersRepository>(
     "SurveysUsersRepository",
     SurveysUsersRepository
+);
+
+
+container.registerSingleton<IMailProvider>(
+    "SendMailProvider",
+    SendMailProvider
 );

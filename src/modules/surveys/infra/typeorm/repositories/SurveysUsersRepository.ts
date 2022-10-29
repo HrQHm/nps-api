@@ -46,7 +46,7 @@ class SurveysUsersRepository implements ISurveysUsersRepository {
             .execute()
     };
 
-    async list(id: string): Promise<SurveyUser[]> {
+    async listByIdSurvey(id: string): Promise<SurveyUser[]> {
         const surveysUsers = await this.repository.findBy({
             survey_id: id,
             value: Not(IsNull())

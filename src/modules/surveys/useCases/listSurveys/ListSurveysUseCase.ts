@@ -6,11 +6,11 @@ import { ISurveysRepository } from "../../repositories/ISurveysRepository";
 class ListSurveysUseCase {
     constructor(
         @inject("SurveysRepository")
-        private surveysRepositry: ISurveysRepository
+        private surveysRepository: ISurveysRepository
     ) { }
 
     async execute(): Promise<Survey[]> {
-        const surveys = await this.surveysRepositry.list();
+        const surveys = await this.surveysRepository.list();
         return surveys;
     }
 };

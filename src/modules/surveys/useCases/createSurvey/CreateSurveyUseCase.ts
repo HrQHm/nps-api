@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { Survey } from "../../infra/typeorm/entities/Survey";
 import { ISurveysRepository } from "../../repositories/ISurveysRepository";
 
 @injectable()
@@ -8,8 +9,9 @@ class CreateSurveyUseCase {
         private surveysRepository: ISurveysRepository
     ) { }
 
-    async execute(title: string, description: string): Promise<void> {
-        await this.surveysRepository.create(title, description);
+    async execute(title: string, description: string): Promise<Survey> {
+        const survey = await this.surveysRepository.create(title, description);
+        return survey;
     };
 };
 

@@ -17,7 +17,7 @@ class CalculateNpsUseCase {
         private surveysUsersRepository: ISurveysUsersRepository
     ) { }
     async execute(id: string): Promise<IResponse> {
-        const surveyUsers = await this.surveysUsersRepository.list(id);
+        const surveyUsers = await this.surveysUsersRepository.listByIdSurvey(id);
         const detractors = surveyUsers.filter((survey) =>
             survey.value >= 0 && survey.value <= 6
         ).length;
@@ -32,7 +32,7 @@ class CalculateNpsUseCase {
 
         const totalAnswers = surveyUsers.length;
         const nps = Number(
-            (((promoters - promoters) / totalAnswers) * 100).toFixed(2)
+            (((promoters - detractors) / totalAnswers) * 100).toFixed(2)
         );
 
         return {
