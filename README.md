@@ -18,17 +18,18 @@ $ yarn
 Ou:
 ```
 $ npm install
-
+```
 
 ### **Configurando Banco de dados**
 A aplicação usa um único banco de dados para testes, podendo se utilizar qualquer outro banco relacional. No meu caso utilizei o SqLite3.
 A nova versão do typeorm requer a configuração do banco utilizado no arquivo index.ts no diretorio src/database. 
-```
+
 ### Migrations
 Lembre se de rodar a migrations com seguinte comando:
+
 ```
 $ npm run typeorm migration:run
-
+```
 
 ## `.env`
 Neste arquivo, você deve configurar a URL para envio e-mail
@@ -50,5 +51,5 @@ npm run dev
 ---
 
 
-### ** Testes ** ###
+### **Testes**
 Todas as rotas da api foram testadas com teste unitário utilizando jest.
